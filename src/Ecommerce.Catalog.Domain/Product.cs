@@ -25,6 +25,7 @@ namespace Ecommerce.Catalog.Domain
             Value = value;
             RegisterDate = registerDate;
             Image = image;
+            Validate();
         }
 
         public void Activate() => Active = true;
@@ -59,7 +60,11 @@ namespace Ecommerce.Catalog.Domain
 
         public void Validate()
         {
-
+            AssertionConcern.ValidateIfEmpty(Name, "Product Name field cannot be empty");
+            AssertionConcern.ValidateIfEmpty(Description, "Product Description field cannot be empty");
+            AssertionConcern.ValidateIfEqual(CategoryId, Guid.Empty, "Product CategoryId field cannot be empty");
+            AssertionConcern.ValidateIfLessThanMinDecimal(Value, 0, "Product Value field cannot be less than 0");
+            AssertionConcern.ValidateIfEmpty(Image, "Product Image field cannot be empty");
         }
     }
 }
