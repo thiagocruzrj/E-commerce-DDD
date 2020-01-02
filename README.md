@@ -3,7 +3,7 @@ DDD applied in an E-commerce context.
 
 Tasklist: 
 - [x] Create Git Repository
-- [ ] Create .Net Core 3.1 project
+- [x] Create .Net Core 3.1 project
 - [ ] Write entities
 - [ ] Validade entities
 - [ ] Aggregating with value object
