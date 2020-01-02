@@ -62,9 +62,4 @@ namespace Ecommerce.Catalog.Domain
 
         }
     }
-
-    public class Category : Entity
-    {
-
-    }
 }
