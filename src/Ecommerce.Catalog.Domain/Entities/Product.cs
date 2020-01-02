@@ -1,4 +1,5 @@
-﻿using Ecommerce.Core.DomainObjects;
+﻿using Ecommerce.Catalog.Domain.ValueObjects;
+using Ecommerce.Core.DomainObjects;
 using System;
 
 namespace Ecommerce.Catalog.Domain.Entities
@@ -15,8 +16,9 @@ namespace Ecommerce.Catalog.Domain.Entities
         public string Image { get; private set; }
         public int StockQuantity { get; private set; }
         public Category Category { get; private set; }
+        public Dimensions Dimensions { get; private set; }
 
-        public Product(string name, string description, bool active, decimal value, Guid categoryId, DateTime registerDate, string image)
+        public Product(string name, string description, bool active, decimal value, Guid categoryId, DateTime registerDate, string image, Dimensions dimensions)
         {
             CategoryId = categoryId;
             Name = name;
@@ -25,6 +27,7 @@ namespace Ecommerce.Catalog.Domain.Entities
             Value = value;
             RegisterDate = registerDate;
             Image = image;
+            Dimensions = dimensions;
             Validate();
         }
 
