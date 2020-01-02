@@ -1,7 +1,7 @@
 ﻿using Ecommerce.Core.DomainObjects;
 using System;
 
-namespace Ecommerce.Catalog.Domain
+namespace Ecommerce.Catalog.Domain.Entities
 {
     public class Product : Entity, IAggregateRoot
     {
@@ -39,12 +39,14 @@ namespace Ecommerce.Catalog.Domain
 
         public void ChangeDescription(string description)
         {
+            AssertionConcern.ValidateIfEmpty(description, "Product Description field cannot be empty");
             Description = description;
         }
 
         public void DebitStock(int quantity)
         {
             if (quantity < 0) quantity *= -1;
+            if (!HasStock(quantity)) throw new DomainException("Insuficient stock");
             StockQuantity -= quantity;
         }
 
