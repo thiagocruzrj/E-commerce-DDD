@@ -6,7 +6,6 @@ namespace Ecommerce.Catalog.Domain.Entities
 {
     public class Product : Entity, IAggregateRoot
     {
-
         public Guid CategoryId { get; private set; }
         public string Name { get; private set; }
         public string Description { get; private set; }
@@ -68,7 +67,7 @@ namespace Ecommerce.Catalog.Domain.Entities
             AssertionConcern.ValidateIfEmpty(Name, "Product Name field cannot be empty");
             AssertionConcern.ValidateIfEmpty(Description, "Product Description field cannot be empty");
             AssertionConcern.ValidateIfEqual(CategoryId, Guid.Empty, "Product CategoryId field cannot be empty");
-            AssertionConcern.ValidateIfLessThanMinDecimal(Value, 0, "Product Value field cannot be less than 0");
+            AssertionConcern.ValidateIfLessThanMin(Value, 1, "Product Value field cannot be less than 0");
             AssertionConcern.ValidateIfEmpty(Image, "Product Image field cannot be empty");
         }
     }

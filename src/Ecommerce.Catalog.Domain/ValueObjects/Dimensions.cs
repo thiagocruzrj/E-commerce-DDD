@@ -9,9 +9,9 @@ namespace Ecommerce.Catalog.Domain.ValueObjects
         public decimal Depth { get; private set; }
         public Dimensions(decimal height, decimal width, decimal depth)
         {
-            AssertionConcern.ValidateIfLessThanMinDecimal(Height, 1, "Heigth field cannot be less or equals than 0");
-            AssertionConcern.ValidateIfLessThanMinDecimal(Width, 1, "Width field cannot be less or equals than 0");
-            AssertionConcern.ValidateIfLessThanMinDecimal(Depth, 1, "Depth field cannot be less or equals than 0");
+            AssertionConcern.ValidateIfLessThanMin(height, 1, "Heigth field cannot be less or equals than 0");
+            AssertionConcern.ValidateIfLessThanMin(width, 1, "Width field cannot be less or equals than 0");
+            AssertionConcern.ValidateIfLessThanMin(depth, 1, "Depth field cannot be less or equals than 0");
 
             Height = height;
             Width = width;

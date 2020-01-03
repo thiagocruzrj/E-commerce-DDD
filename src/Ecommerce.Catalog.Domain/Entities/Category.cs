@@ -21,7 +21,7 @@ namespace Ecommerce.Catalog.Domain.Entities
         public void Validate()
         {
             AssertionConcern.ValidateIfEmpty(Name, "Category Name field cannot be empty");
-            AssertionConcern.ValidateIfLessThanMinInt(Code, 0, "Code field cannot be 0");
+            AssertionConcern.ValidateIfLessThanMin(Code, 0, "Code field cannot be 0");
         }
     }
 }

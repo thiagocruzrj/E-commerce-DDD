@@ -64,7 +64,7 @@ namespace Ecommerce.Core.DomainObjects
             }
         }
 
-        public static void ValidateBetweenMinAndMaxDouble(double value, double min, double max, string message)
+        public static void ValidateBetweenMinAndMax(double value, double min, double max, string message)
         {
             if (value < min || value > max)
             {
@@ -72,7 +72,7 @@ namespace Ecommerce.Core.DomainObjects
             }
         }
 
-        public static void ValidateBetweenMinAndMaxFloat(float value, float min, float max, string message)
+        public static void ValidateBetweenMinAndMax(float value, float min, float max, string message)
         {
             if (value < min || value > max)
             {
@@ -80,7 +80,7 @@ namespace Ecommerce.Core.DomainObjects
             }
         }
 
-        public static void ValidateBetweenMinAndMaxInt(int value, int min, int max, string message)
+        public static void ValidateBetweenMinAndMax(int value, int min, int max, string message)
         {
             if (value < min || value > max)
             {
@@ -88,7 +88,7 @@ namespace Ecommerce.Core.DomainObjects
             }
         }
 
-        public static void ValidateBetweenMinAndMaxLong(long value, long min, long max, string message)
+        public static void ValidateBetweenMinAndMax(long value, long min, long max, string message)
         {
             if (value < min || value > max)
             {
@@ -96,7 +96,7 @@ namespace Ecommerce.Core.DomainObjects
             }
         }
 
-        public static void ValidateBetweenMinAndMaxDecimal(decimal value, decimal min, long max, string message)
+        public static void ValidateBetweenMinAndMax(decimal value, decimal min, long max, string message)
         {
             if (value < min || value > max)
             {
@@ -104,7 +104,7 @@ namespace Ecommerce.Core.DomainObjects
             }
         }
 
-        public static void ValidateIfLessThanMinLong(long value, long min, string message)
+        public static void ValidateIfLessThanMin(long value, long min, string message)
         {
             if (value < min)
             {
@@ -112,7 +112,7 @@ namespace Ecommerce.Core.DomainObjects
             }
         }
 
-        public static void ValidateIfLessThanMinDouble(double value, double min, string message)
+        public static void ValidateIfLessThanMin(double value, double min, string message)
         {
             if (value < min)
             {
@@ -120,7 +120,7 @@ namespace Ecommerce.Core.DomainObjects
             }
         }
 
-        public static void ValidateIfLessThanMinDecimal(decimal value, decimal min, string message)
+        public static void ValidateIfLessThanMin(decimal value, decimal min, string message)
         {
             if (value < min)
             {
@@ -128,7 +128,7 @@ namespace Ecommerce.Core.DomainObjects
             }
         }
 
-        public static void ValidateIfLessThanMinInt(int value, int min, string message)
+        public static void ValidateIfLessThanMin(int value, int min, string message)
         {
             if (value < min)
             {
