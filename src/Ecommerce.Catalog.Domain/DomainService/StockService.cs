@@ -31,8 +31,8 @@ namespace Ecommerce.Catalog.Domain.DomainService
 
             if (product == null) return false;
             product.ReplenishStock(quantity);
-
             _productRepository.Update(product);
+
             return await _productRepository.UnitOfWork.Commit();
         }
 
