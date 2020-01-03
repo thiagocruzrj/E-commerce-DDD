@@ -1,4 +1,5 @@
 ﻿using Ecommerce.Core.DomainObjects;
+using System.Collections.Generic;
 
 namespace Ecommerce.Catalog.Domain.Entities
 {
@@ -6,6 +7,12 @@ namespace Ecommerce.Catalog.Domain.Entities
     {
         public string Name { get; private set; }
         public int Code { get; private set; }
+
+        // EF Relation
+        public ICollection<Product> Products { get; private set; }
+
+        protected Category() { }
+
         public Category(string name, int code)
         {
             Name = name;
