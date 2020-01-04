@@ -9,6 +9,8 @@ using Microsoft.Extensions.Hosting;
 using AutoMapper;
 using Ecommerce.Catalog.Application.AutoMapper;
 using MediatR;
+using Ecommerce.Catalog.Data;
+using Ecommerce.WebApp.MVC.Setup;
 
 namespace Ecommerce.WebApp.MVC
 {
@@ -24,16 +26,25 @@ namespace Ecommerce.WebApp.MVC
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddDbContext<CatalogContext>(options =>
+                options.UseSqlServer(
+                    Configuration.GetConnectionString("DefaultConnection")));
+
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+
             services.AddControllersWithViews();
             services.AddRazorPages();
 
             services.AddAutoMapper(typeof(DomainToViewModelMappingProfile), typeof(ViewModelToDomainMappingProfile));
             services.AddMediatR(typeof(Startup));
+
+            services.RegisterServices();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

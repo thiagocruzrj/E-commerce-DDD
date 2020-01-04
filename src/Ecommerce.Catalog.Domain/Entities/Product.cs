@@ -17,6 +17,8 @@ namespace Ecommerce.Catalog.Domain.Entities
         public Category Category { get; private set; }
         public Dimensions Dimensions { get; private set; }
 
+        protected Product() { }
+
         public Product(string name, string description, bool active, decimal value, Guid categoryId, DateTime registerDate, string image, Dimensions dimensions)
         {
             CategoryId = categoryId;
