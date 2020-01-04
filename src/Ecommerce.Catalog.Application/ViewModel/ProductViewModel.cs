@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
 
 namespace Ecommerce.Catalog.Application.ViewModel
 {
@@ -47,6 +46,6 @@ namespace Ecommerce.Catalog.Application.ViewModel
         [Required(ErrorMessage = "Field {0} is required")]
         public int Depth { get; set; }
 
-        public IEnumerable<CategoryViewModel> Categorias { get; set; }
+        public IEnumerable<CategoryViewModel> Categories { get; set; }
     }
 }
