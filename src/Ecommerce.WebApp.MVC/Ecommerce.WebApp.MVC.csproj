@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UserSecretsId>aspnet-Ecommerce.WebApp.MVC-FA056E20-6B3B-4470-871D-DB8C45BA110F</UserSecretsId>
+    <DockerDefaultTargetOS>Windows</DockerDefaultTargetOS>
+    <DockerfileContext>..\..</DockerfileContext>
+  </PropertyGroup>
+
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.9.10" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <ProjectReference Include="..\Ecommerce.Catalog.Application\Ecommerce.Catalog.Application.csproj" />
+    <ProjectReference Include="..\Ecommerce.Catalog.Data\Ecommerce.Catalog.Data.csproj" />
+    <ProjectReference Include="..\Ecommerce.Catalog.Domain\Ecommerce.Catalog.Domain.csproj" />
+    <ProjectReference Include="..\Ecommerce.Core\Ecommerce.Core.csproj" />
+  </ItemGroup>
+
+</Project>
