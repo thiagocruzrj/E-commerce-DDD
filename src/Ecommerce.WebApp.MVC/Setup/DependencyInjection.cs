@@ -2,8 +2,10 @@
 using Ecommerce.Catalog.Data;
 using Ecommerce.Catalog.Data.Repository;
 using Ecommerce.Catalog.Domain.DomainService;
+using Ecommerce.Catalog.Domain.Events;
 using Ecommerce.Catalog.Domain.Repository;
 using Ecommerce.Core.Communication;
+using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -24,6 +26,8 @@ namespace Ecommerce.WebApp.MVC.Setup
             services.AddScoped<IProductAppService, ProductAppService>();
             services.AddScoped<IStockService, StockService>();
             services.AddScoped<CatalogContext>();
+
+            services.AddScoped<INotificationHandler<ProductBelowStockEvent>, ProductEventHandler>();
         }
     }
 }
