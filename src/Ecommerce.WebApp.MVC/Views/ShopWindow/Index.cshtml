@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<Ecommerce.Catalog.Application.ViewModel.ProductViewModel>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "ShowWindow";
 }
 <style>
     h4 {
@@ -62,12 +62,8 @@
 </style>
 <div class="container">
 
-    <h1>Products administration</h1>
-    <hr />
-    <div class="row">
-        <a asp-controller="AdminProducts" asp-action="NewProduct" class="btn btn-success right">+ Add New Product</a>
-    </div>
-    <hr />
+    <h1>Show window</h1>
+    <br />
     <div class="row">
         <!-- BEGIN PRODUCTS -->
         @{
@@ -75,20 +71,21 @@
             {
                 <div class="col-md-3 col-sm-6">
                     <span class="thumbnail">
-                        <img width="200" height="200" src="~/Images/@product.Image" />
+                        <a asp-controller="ShopWindow" asp-action="ProductDetail" asp-route-id="@product.Id"><img width="200" height="200" src="~/Images/@product.Image" /></a>
                         <h4>@product.Name</h4>
-                        <p>@product.StockQuantity in stock</p>
+                        <p>Apenas @product.StockQuantity em estoque!</p>
                         <p>@product.Description</p>
-                        <p class="price">@product.Value.ToString("C")</p>
                         <hr class="line">
                         <div class="row">
-                            <a asp-controller="AdminProducts" asp-action="UpdateProduct" asp-route-id="@product.Id" class="btn btn-success right">Update</a> &nbsp;
-                            <a asp-controller="AdminProducts" asp-action="UpdateStock" asp-route-id="@product.Id" class="btn btn-info right">Stock</a>
+                            <div class="col-md-6 col-sm-6">
+                                <p class="price">@product.Value.ToString("C")</p>
+                            </div>
                         </div>
                     </span>
                 </div>
             }
         }
+
         <!-- END PRODUCTS -->
     </div>
 </div>

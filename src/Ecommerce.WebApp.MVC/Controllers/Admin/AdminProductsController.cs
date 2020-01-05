@@ -39,8 +39,6 @@ namespace Ecommerce.WebApp.MVC.Controllers.Admin
             return RedirectToAction("Index");
         }
 
-        [HttpPost]
-        [Route("new-product")]
         public async Task<ProductViewModel> PopulateCategories(ProductViewModel product)
         {
             product.Categories = await _productAppService.GetCategories();

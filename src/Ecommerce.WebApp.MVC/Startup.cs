@@ -73,7 +73,7 @@ namespace Ecommerce.WebApp.MVC
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=ShopWindow}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
         }
