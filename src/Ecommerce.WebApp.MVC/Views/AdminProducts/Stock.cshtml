@@ -1,0 +1,32 @@
+﻿@model Ecommerce.Catalog.Application.ViewModel.ProductViewModel
+@{
+    ViewData["Title"] = "Update Product";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-4 item-photo">
+            <img width="400" height="400" src="~/Images/@Model.Image" />
+        </div>
+        <div class="col-xs-5" style="border:20px solid white">
+            <h3>@Model.Name</h3>
+
+            <h6 class="title-price"><small>Offer</small></h6>
+            <h3 style="margin-top:0px;">@Model.Value.ToString("C")</h3>
+
+            <p>Apenas @Model.StockQuantity in stock!</p>
+            <p>@Model.Description</p>
+
+            <div class="section" style="padding-bottom:20px;">
+                <form method="post" asp-controller="AdminProducts" asp-action="UpdateStock">
+                    <input type="hidden" id="Id" name="Id" value="@Model.Id" />
+                    <input type="text" id="quantity" name="quantity" />
+                    <button class="btn btn-info">Update stock</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

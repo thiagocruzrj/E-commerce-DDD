@@ -55,7 +55,7 @@ namespace Ecommerce.WebApp.MVC.Controllers.Admin
         }
 
         [HttpPost]
-        [Route("editar-produto")]
+        [Route("update-product")]
         public async Task<IActionResult> UpdateProduct(Guid id, ProductViewModel productViewModel)
         {
             var product = await _productAppService.GetById(id);
