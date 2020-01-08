@@ -35,6 +35,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ecommerce.WebApp.MVC", "src
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ecommerce.Sales.Domain", "src\Ecommerce.Sales.Domain\Ecommerce.Sales.Domain.csproj", "{BC5977DD-8E40-4EA8-AD71-0C5C4D7742F6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ecommerce.Sales.Application", "src\Ecommerce.Sales.Application\Ecommerce.Sales.Application.csproj", "{F72EA3D3-8CE5-4B1D-910E-AEDE76B00125}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ecommerce.Sales.Data", "src\Ecommerce.Sales.Data\Ecommerce.Sales.Data.csproj", "{4F50FDF2-E043-415B-A121-69532126FF05}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,6 +73,14 @@ Global
 		{BC5977DD-8E40-4EA8-AD71-0C5C4D7742F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BC5977DD-8E40-4EA8-AD71-0C5C4D7742F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BC5977DD-8E40-4EA8-AD71-0C5C4D7742F6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F72EA3D3-8CE5-4B1D-910E-AEDE76B00125}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F72EA3D3-8CE5-4B1D-910E-AEDE76B00125}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F72EA3D3-8CE5-4B1D-910E-AEDE76B00125}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F72EA3D3-8CE5-4B1D-910E-AEDE76B00125}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4F50FDF2-E043-415B-A121-69532126FF05}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4F50FDF2-E043-415B-A121-69532126FF05}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4F50FDF2-E043-415B-A121-69532126FF05}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4F50FDF2-E043-415B-A121-69532126FF05}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -88,6 +100,8 @@ Global
 		{AE5C9157-6142-437E-AE1E-3C2866E3C304} = {A9B26463-CE6E-4067-81C3-976E4DA67B0E}
 		{1DBBA6F5-9940-4542-B78F-1D131348EB17} = {4BB70940-D212-41A1-8773-F7ED30EF1080}
 		{BC5977DD-8E40-4EA8-AD71-0C5C4D7742F6} = {FE54FCC8-EA3E-447B-A62D-C311709E0B5C}
+		{F72EA3D3-8CE5-4B1D-910E-AEDE76B00125} = {FE54FCC8-EA3E-447B-A62D-C311709E0B5C}
+		{4F50FDF2-E043-415B-A121-69532126FF05} = {FE54FCC8-EA3E-447B-A62D-C311709E0B5C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2D5D4022-3635-48B1-89C9-FD885B05E2B8}
