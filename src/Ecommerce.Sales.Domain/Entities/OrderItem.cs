@@ -44,5 +44,10 @@ namespace Ecommerce.Sales.Domain.Entities
         {
             Quantity = units;
         }
+
+        public override bool IsValid()
+        {
+            return true;
+        }
     }
 }
