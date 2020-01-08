@@ -13,5 +13,36 @@ namespace Ecommerce.Sales.Domain.Entities
 
         // EF Relation
         public Order Order { get; private set; }
+
+        // EF Use
+        public OrderItem() { }
+
+        public OrderItem(Guid productId, string productName, int quantity, decimal unitValue)
+        {
+            ProductId = productId;
+            ProductName = productName;
+            Quantity = quantity;
+            UnitValue = unitValue;
+        }
+
+        internal void AssociateOrder(Guid orderId)
+        {
+            OrderId = orderId;
+        }
+
+        public decimal CalculatePrice()
+        {
+            return Quantity * UnitValue;
+        }
+
+        internal void AddUnits(int units)
+        {
+            Quantity += units;
+        }
+
+        internal void UpdateUnits(int units)
+        {
+            Quantity = units;
+        }
     }
 }

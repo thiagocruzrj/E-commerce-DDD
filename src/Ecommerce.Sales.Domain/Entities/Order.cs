@@ -21,5 +21,6 @@ namespace Ecommerce.Sales.Domain.Entities
 
         // EF Relation
         public virtual Voucher Voucher { get; private set; }
+
     }
 }
