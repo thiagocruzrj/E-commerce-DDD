@@ -27,6 +27,9 @@
     <ProjectReference Include="..\Ecommerce.Catalog.Data\Ecommerce.Catalog.Data.csproj" />
     <ProjectReference Include="..\Ecommerce.Catalog.Domain\Ecommerce.Catalog.Domain.csproj" />
     <ProjectReference Include="..\Ecommerce.Core\Ecommerce.Core.csproj" />
+    <ProjectReference Include="..\Ecommerce.Sales.Application\Ecommerce.Sales.Application.csproj" />
+    <ProjectReference Include="..\Ecommerce.Sales.Data\Ecommerce.Sales.Data.csproj" />
+    <ProjectReference Include="..\Ecommerce.Sales.Domain\Ecommerce.Sales.Domain.csproj" />
   </ItemGroup>
 
 
