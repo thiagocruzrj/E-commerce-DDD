@@ -5,12 +5,9 @@ using Ecommerce.Catalog.Domain.DomainService;
 using Ecommerce.Catalog.Domain.Events;
 using Ecommerce.Catalog.Domain.Repository;
 using Ecommerce.Core.Communication;
+using Ecommerce.Sales.Application.Commands;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Ecommerce.WebApp.MVC.Setup
 {
@@ -28,6 +25,9 @@ namespace Ecommerce.WebApp.MVC.Setup
             services.AddScoped<CatalogContext>();
 
             services.AddScoped<INotificationHandler<ProductBelowStockEvent>, ProductEventHandler>();
+
+            // Sales
+            services.AddScoped<IRequestHandler<AddOrderItemCommand, bool>, OrderCommandHandler>();
         }
     }
 }
