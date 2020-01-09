@@ -20,5 +20,10 @@ namespace Ecommerce.Core.Communication
         {
             await _mediator.Publish(eventMediatr);
         }
+
+        public async Task<bool> SendCommand<T>(T command) where T : Command
+        {
+            return await _mediator.Send(command);
+        }
     }
 }
