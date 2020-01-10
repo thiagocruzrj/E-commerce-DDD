@@ -11,6 +11,7 @@ using Ecommerce.Catalog.Application.AutoMapper;
 using MediatR;
 using Ecommerce.Catalog.Data;
 using Ecommerce.WebApp.MVC.Setup;
+using Ecommerce.Sales.Data;
 
 namespace Ecommerce.WebApp.MVC
 {
@@ -32,8 +33,10 @@ namespace Ecommerce.WebApp.MVC
                     Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddDbContext<CatalogContext>(options =>
-                options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection")));
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddDbContext<SalesContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
