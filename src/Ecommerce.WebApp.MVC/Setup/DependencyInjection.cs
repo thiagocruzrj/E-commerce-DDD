@@ -6,6 +6,7 @@ using Ecommerce.Catalog.Domain.Events;
 using Ecommerce.Catalog.Domain.Repository;
 using Ecommerce.Core.Communication;
 using Ecommerce.Sales.Application.Commands;
+using Ecommerce.Sales.Domain.Repositories;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 

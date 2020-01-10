@@ -35,6 +35,9 @@ namespace Ecommerce.WebApp.MVC.Controllers
             }
 
             var command = new AddOrderItemCommand(ClientId, product.Id, product.Name, quantity, product.Value);
+            await _mediatrHandler.SendCommand(command);
+
+            // everything ok ?
 
             TempData["Erro"] = "Product unavailable";
             return RedirectToAction("ProductDetail", "ShopWindow", new { id });
