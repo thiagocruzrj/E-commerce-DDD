@@ -1,4 +1,6 @@
-﻿using Ecommerce.Core.Messages;
+﻿using Ecommerce.Core.Communication.Mediator;
+using Ecommerce.Core.Messages;
+using Ecommerce.Core.Messages.CommonMessages.Notifications;
 using Ecommerce.Sales.Domain.Entities;
 using Ecommerce.Sales.Domain.Repositories;
 using MediatR;
@@ -14,10 +16,12 @@ namespace Ecommerce.Sales.Application.Commands
     public class OrderCommandHandler : IRequestHandler<AddOrderItemCommand, bool>
     {
         private readonly IOrderRepository _orderRepository;
+        private readonly IMediatrHandler _mediatorHandler;
 
-        public OrderCommandHandler(IOrderRepository orderRepository)
+        public OrderCommandHandler(IOrderRepository orderRepository, IMediatrHandler mediatorHandler)
         {
             _orderRepository = orderRepository;
+            _mediatorHandler = mediatorHandler;
         }
 
         public async Task<bool> Handle(AddOrderItemCommand message, CancellationToken cancellationToken)
@@ -54,7 +58,7 @@ namespace Ecommerce.Sales.Application.Commands
             if (message.IsValid()) return true;
             foreach (var error in message.ValidationResult.Errors)
             {
-                // launching an error event
+                _mediatorHandler.PubishNotification(new DomainNotification(message.MessageType, error.ErrorMessage));
             }
 
             return false;

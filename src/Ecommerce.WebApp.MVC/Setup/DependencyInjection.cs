@@ -4,8 +4,8 @@ using Ecommerce.Catalog.Data.Repository;
 using Ecommerce.Catalog.Domain.DomainService;
 using Ecommerce.Catalog.Domain.Events;
 using Ecommerce.Catalog.Domain.Repository;
-using Ecommerce.Core.Communication;
 using Ecommerce.Core.Communication.Mediator;
+using Ecommerce.Core.Messages.CommonMessages.Notifications;
 using Ecommerce.Sales.Application.Commands;
 using Ecommerce.Sales.Data;
 using Ecommerce.Sales.Data.Repository;
@@ -19,8 +19,11 @@ namespace Ecommerce.WebApp.MVC.Setup
     {
         public static void RegisterServices(this IServiceCollection services)
         {
-            // Domain Bus (Mediator)
+            // Mediator
             services.AddScoped<IMediatrHandler, MediatrHandler>();
+
+            // Notifications
+            services.AddScoped<INotificationHandler<DomainNotification>, DomainNotificationHandler>();
 
             // Catalog
             services.AddScoped<IProductRepository, ProductRepository>();
