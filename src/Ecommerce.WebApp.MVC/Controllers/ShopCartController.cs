@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Ecommerce.Catalog.Application.Services;
-using Ecommerce.Catalog.Domain.Repository;
-using Ecommerce.Core.Communication;
+using Ecommerce.Core.Communication.Mediator;
 using Ecommerce.Sales.Application.Commands;
 using Microsoft.AspNetCore.Mvc;
 

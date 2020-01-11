@@ -1,7 +1,5 @@
-﻿using Ecommerce.Core.DomainObjects;
+﻿using Ecommerce.Core.Messages.DomainEvents;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Ecommerce.Catalog.Domain.Events
 {

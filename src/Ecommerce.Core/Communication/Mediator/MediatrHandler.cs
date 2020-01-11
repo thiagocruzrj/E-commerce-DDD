@@ -1,11 +1,8 @@
 ﻿using Ecommerce.Core.Messages;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
-namespace Ecommerce.Core.Communication
+namespace Ecommerce.Core.Communication.Mediator
 {
     public class MediatrHandler : IMediatrHandler
     {

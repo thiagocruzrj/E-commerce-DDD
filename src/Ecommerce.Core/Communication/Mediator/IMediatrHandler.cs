@@ -1,7 +1,7 @@
 ﻿using Ecommerce.Core.Messages;
 using System.Threading.Tasks;
 
-namespace Ecommerce.Core.Communication
+namespace Ecommerce.Core.Communication.Mediator
 {
     public interface IMediatrHandler
     {

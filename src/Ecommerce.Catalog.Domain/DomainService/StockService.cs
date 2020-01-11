@@ -1,6 +1,6 @@
 ﻿using Ecommerce.Catalog.Domain.Events;
 using Ecommerce.Catalog.Domain.Repository;
-using Ecommerce.Core.Communication;
+using Ecommerce.Core.Communication.Mediator;
 using System;
 using System.Threading.Tasks;
 

@@ -1,9 +1,6 @@
-﻿using Ecommerce.Core.Messages;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System;
 
-namespace Ecommerce.Core.DomainObjects
+namespace Ecommerce.Core.Messages.DomainEvents
 {
     public class DomainEvent : Event
     {
