@@ -14,7 +14,7 @@ namespace Ecommerce.Core.Communication.Mediator
             _mediator = mediator;
         }
 
-        public async Task PubishNotification<T>(T notification) where T : DomainNotification
+        public async Task PublishNotification<T>(T notification) where T : DomainNotification
         {
             await _mediator.Publish(notification);
         }

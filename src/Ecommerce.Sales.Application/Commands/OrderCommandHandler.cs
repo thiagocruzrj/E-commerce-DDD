@@ -58,7 +58,7 @@ namespace Ecommerce.Sales.Application.Commands
             if (message.IsValid()) return true;
             foreach (var error in message.ValidationResult.Errors)
             {
-                _mediatorHandler.PubishNotification(new DomainNotification(message.MessageType, error.ErrorMessage));
+                _mediatorHandler.PublishNotification(new DomainNotification(message.MessageType, error.ErrorMessage));
             }
 
             return false;

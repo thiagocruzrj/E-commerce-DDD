@@ -2,7 +2,9 @@
 using System.Threading.Tasks;
 using Ecommerce.Catalog.Application.Services;
 using Ecommerce.Core.Communication.Mediator;
+using Ecommerce.Core.Messages.CommonMessages.Notifications;
 using Ecommerce.Sales.Application.Commands;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Ecommerce.WebApp.MVC.Controllers
@@ -12,7 +14,10 @@ namespace Ecommerce.WebApp.MVC.Controllers
         private readonly IProductAppService _productAppService;
         private readonly IMediatrHandler _mediatrHandler;
 
-        public ShopCartController(IProductAppService productAppService, IMediatrHandler mediatrHandler)
+        public ShopCartController(INotificationHandler<DomainNotification> notifications,
+                                    IProductAppService productAppService,
+                                    IMediatrHandler mediatrHandler)
+                                    : base(notifications, mediatrHandler)
         {
             _mediatrHandler = mediatrHandler;
             _productAppService = productAppService;
@@ -34,7 +39,10 @@ namespace Ecommerce.WebApp.MVC.Controllers
             var command = new AddOrderItemCommand(ClientId, product.Id, product.Name, quantity, product.Value);
             await _mediatrHandler.SendCommand(command);
 
-            // everything ok ?
+            if(ValidOperation())
+            {
+                return RedirectToAction("Index");
+            }
 
             TempData["Erro"] = "Product unavailable";
             return RedirectToAction("ProductDetail", "ShopWindow", new { id });

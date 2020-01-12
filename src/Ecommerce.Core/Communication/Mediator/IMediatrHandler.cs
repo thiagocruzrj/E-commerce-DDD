@@ -8,6 +8,6 @@ namespace Ecommerce.Core.Communication.Mediator
     {
         Task PublishEvent<T>(T eventMediatr) where T : Event;
         Task<bool> SendCommand<T>(T command) where T : Command;
-        Task PubishNotification<T>(T notification) where T : DomainNotification;
+        Task PublishNotification<T>(T notification) where T : DomainNotification;
     }
 }
