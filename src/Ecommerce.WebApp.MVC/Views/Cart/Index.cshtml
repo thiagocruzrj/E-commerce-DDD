@@ -1,0 +1,126 @@
+﻿@model Ecommerce.Sales.Application.Queries.ViewModels.CartViewModel
+@{
+    ViewData["Title"] = "Index";
+}
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12 col-md-10 col-md-offset-1">
+
+            <vc:summary />
+
+            @{
+                if (Model?.Items != null)
+                {
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Product</th>
+                                <th>Quantity</th>
+                                <th class="text-center">Price</th>
+                                <th class="text-center">Total Price</th>
+                                <th> </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @{
+                                foreach (var item in Model.Items)
+                                {
+                                    <tr>
+                                        <td class="col-sm-5 col-md-5">
+                                            <div class="media">
+                                                <div class="media-body">
+                                                    <h4 class="media-heading"><a asp-controller="Vitrine" asp-action="ProductDetail" asp-route-id="@item.ProductId">@item.ProdutoName</a></h4>
+                                                </div>
+                                            </div>
+                                        </td>
+
+                                        <td class="col-sm-2 col-md-2" style="text-align: center">
+                                            <form method="post" asp-controller="Cart" asp-action="UpdateItem">
+                                                <input type="hidden" id="Id" name="Id" value="@item.ProductId" />
+                                                <div class="row" style="float: left">
+                                                    <input style="width: 70px" type="text" class="form-control" name="quantity" id="quantity" value="@item.Quantity">
+                                                </div>
+                                                <div class="row" style="float: right">
+                                                    <button type="submit" class="btn btn-success">
+                                                        <span class="fas fa-sync"></span>
+                                                    </button>
+                                                </div>
+                                            </form>
+                                        </td>
+                                        <td class="col-sm-1 col-md-1 text-center"><strong>@item.UnitValue.ToString("C")</strong></td>
+                                        <td class="col-sm-1 col-md-1 text-center"><strong>@item.TotalPrice.ToString("C")</strong></td>
+
+                                        <td class="col-sm-1 col-md-1">
+                                            <form method="post" asp-controller="Cart" asp-action="RemoveItem">
+                                                <input type="hidden" id="Id" name="Id" value="@item.ProductId" />
+                                                <button type="submit" class="btn btn-danger">
+                                                    <span class="fas fa-trash-alt"></span> Remove
+                                                </button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+
+                            <tr>
+                                <td> </td>
+                                <td> </td>
+                                <td> </td>
+                                <td><h5>Subtotal</h5></td>
+                                <td class="text-right"><h5><strong>@Model.SubTotal.ToString("C")</strong></h5></td>
+                            </tr>
+                            <tr>
+                                <td> </td>
+                                <td colspan="2">
+                                    <form method="post" asp-controller="Cart" asp-action="ApplyVoucher">
+                                        <div class="row" style="float: left">
+                                            <input placeholder="Voucher" style="width: 150px" type="text" class="form-control" name="VoucherCode" id="VoucherCode" value="@Model.VoucherCode">
+                                        </div>
+                                        <div class="row" style="float: right">
+                                            <button type="submit" class="btn btn-success">
+                                                <span class="fas fa-sync"></span>
+                                            </button>
+                                        </div>
+                                    </form>
+                                </td>
+                                <td><h5>Descount</h5></td>
+                                <td class="text-right"><h5><strong>@Model.DescountValue.ToString("C")</strong></h5></td>
+                            </tr>
+                            <tr>
+                                <td> </td>
+                                <td> </td>
+                                <td> </td>
+                                <td>
+                                    <h3>Total</h3>
+                                </td>
+                                <td class="text-right">
+                                    <h3><strong>@Model.TotalPrice.ToString("C")</strong></h3>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td> </td>
+                                <td> </td>
+                                <td> </td>
+                                <td>
+                                    <a asp-controller="ShopWindow" asp-action="Index" class="btn btn-dark">
+                                        <span class="fa fa-shopping-cart"></span>Continue to buy
+                                    </a>
+                                </td>
+                                <td>
+                                    <a asp-controller="Cart" asp-action="PurchaseSummary" class="btn btn-success">
+                                        <span class="fas fa-play"></span><br /> Finish Purchase
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                }
+                else
+                {
+                    <div><p>Empty cart</p></div>
+                }
+            }
+        </div>
+    </div>
+</div>
