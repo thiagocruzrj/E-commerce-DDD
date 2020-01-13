@@ -51,7 +51,7 @@ namespace Ecommerce.Sales.Application.Commands
 
                 order.AddEvent(new OrderUpdatedEvent(order.ClientId, order.Id, order.TotalPrice));
             }
-            order.AddEvent(new OrderItemAddedEvent(order.ClientId, order.Id,message.ProductId, message.UnitValue, message.Quantity));
+            order.AddEvent(new OrderItemAddedEvent(order.ClientId, order.Id,message.ProductId,message.Name, message.UnitValue, message.Quantity));
             return await _orderRepository.UnitOfWork.Commit();
         }
 

@@ -1,5 +1,6 @@
 ﻿using Ecommerce.Catalog.Domain.Entities;
 using Ecommerce.Core.Data;
+using Ecommerce.Core.Messages;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
@@ -19,6 +20,8 @@ namespace Ecommerce.Catalog.Data
             foreach (var property in modelBuilder.Model.GetEntityTypes().SelectMany(
                 e => e.GetProperties().Where(p => p.ClrType == typeof(string))))
                 property.SetColumnType("varchar(100)");
+
+            modelBuilder.Ignore<Event>();
 
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(CatalogContext).Assembly);
         }

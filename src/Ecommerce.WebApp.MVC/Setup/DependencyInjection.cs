@@ -7,6 +7,7 @@ using Ecommerce.Catalog.Domain.Repository;
 using Ecommerce.Core.Communication.Mediator;
 using Ecommerce.Core.Messages.CommonMessages.Notifications;
 using Ecommerce.Sales.Application.Commands;
+using Ecommerce.Sales.Application.Events;
 using Ecommerce.Sales.Data;
 using Ecommerce.Sales.Data.Repository;
 using Ecommerce.Sales.Domain.Repositories;
@@ -37,6 +38,11 @@ namespace Ecommerce.WebApp.MVC.Setup
             services.AddScoped<IRequestHandler<AddOrderItemCommand, bool>, OrderCommandHandler>();
             services.AddScoped<IOrderRepository, OrderRepository>();
             services.AddScoped<SalesContext>();
+
+            services.AddScoped<INotificationHandler<OrderDraftStartedEvent>, OrderEventHandler>();
+            services.AddScoped<INotificationHandler<OrderItemAddedEvent>, OrderEventHandler>();
+            services.AddScoped<INotificationHandler<OrderUpdatedEvent>, OrderEventHandler>();
+
         }
     }
 }
