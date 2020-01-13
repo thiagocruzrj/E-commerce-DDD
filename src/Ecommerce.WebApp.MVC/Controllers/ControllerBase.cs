@@ -3,6 +3,9 @@ using Ecommerce.Core.Messages.CommonMessages.Notifications;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Ecommerce.WebApp.MVC.Controllers
 {
@@ -20,6 +23,11 @@ namespace Ecommerce.WebApp.MVC.Controllers
         protected bool ValidOperation()
         {
             return !_notifications.HasNotification();
+        }
+
+        protected IEnumerable<string> GetErroMessage()
+        {
+            return _notifications.GetNotifications().Select(c => c.Value).ToList();
         }
 
         protected void NotifyError(string code, string message)
