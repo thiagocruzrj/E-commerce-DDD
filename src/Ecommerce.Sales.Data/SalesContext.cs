@@ -1,5 +1,7 @@
-﻿using Ecommerce.Core.Data;
+﻿using Ecommerce.Core.Communication.Mediator;
+using Ecommerce.Core.Data;
 using Ecommerce.Core.Messages;
+using Ecommerce.Sales.Data.MediatRConfig;
 using Ecommerce.Sales.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -12,10 +14,11 @@ namespace Ecommerce.Sales.Data
 {
     public class SalesContext : DbContext, IUnitOfWork
     {
+        private readonly IMediatrHandler _handler;
 
-        public SalesContext(DbContextOptions<SalesContext> options) : base(options)
+        public SalesContext(DbContextOptions<SalesContext> options, IMediatrHandler handler) : base(options)
         {
-
+            _handler = handler;
         }
 
         public DbSet<Order> Orders { get; set; }
@@ -36,6 +39,8 @@ namespace Ecommerce.Sales.Data
                     entry.Property("RegisterDate").IsModified = false;
                 }
             }
+            await _handler.PublishEvents(this);
+
             return await base.SaveChangesAsync() > 0;
         }
 

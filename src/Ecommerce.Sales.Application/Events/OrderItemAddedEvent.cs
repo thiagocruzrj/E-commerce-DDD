@@ -3,9 +3,9 @@ using System;
 
 namespace Ecommerce.Sales.Application.Events
 {
-    public class OrderItemOrderAddedEvent : Event
+    public class OrderItemAddedEvent : Event
     {
-        public OrderItemOrderAddedEvent(Guid clientId, Guid orderId, Guid productId, decimal unitPrice, int quantity)
+        public OrderItemAddedEvent(Guid clientId, Guid orderId, Guid productId, decimal unitPrice, int quantity)
         {
             ClientId = clientId;
             OrderId = orderId;

@@ -5,10 +5,7 @@ using Ecommerce.Sales.Application.Events;
 using Ecommerce.Sales.Domain.Entities;
 using Ecommerce.Sales.Domain.Repositories;
 using MediatR;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -51,7 +48,10 @@ namespace Ecommerce.Sales.Application.Commands
                 {
                     _orderRepository.AddOrderItem(orderItem);
                 }
+
+                order.AddEvent(new OrderUpdatedEvent(order.ClientId, order.Id, order.TotalPrice));
             }
+            order.AddEvent(new OrderItemAddedEvent(order.ClientId, order.Id,message.ProductId, message.UnitValue, message.Quantity));
             return await _orderRepository.UnitOfWork.Commit();
         }
 
