@@ -7,6 +7,7 @@ namespace Ecommerce.Sales.Application.Events
     {
         public OrderUpdatedEvent(Guid clientId, Guid orderId, decimal totalPrice)
         {
+            AggregateId = orderId;
             ClientId = clientId;
             OrderId = orderId;
             TotalPrice = totalPrice;

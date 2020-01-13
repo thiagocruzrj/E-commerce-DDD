@@ -39,9 +39,11 @@ namespace Ecommerce.Sales.Data
                     entry.Property("RegisterDate").IsModified = false;
                 }
             }
-            await _handler.PublishEvents(this);
 
-            return await base.SaveChangesAsync() > 0;
+            var suceess = await base.SaveChangesAsync() > 0;
+            if(suceess) await _handler.PublishEvents(this);
+
+            return suceess;
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
