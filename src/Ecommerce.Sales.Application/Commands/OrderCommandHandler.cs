@@ -1,6 +1,7 @@
 ﻿using Ecommerce.Core.Communication.Mediator;
 using Ecommerce.Core.Messages;
 using Ecommerce.Core.Messages.CommonMessages.Notifications;
+using Ecommerce.Sales.Application.Events;
 using Ecommerce.Sales.Domain.Entities;
 using Ecommerce.Sales.Domain.Repositories;
 using MediatR;
@@ -37,6 +38,7 @@ namespace Ecommerce.Sales.Application.Commands
                 order.AddItem(orderItem);
 
                 _orderRepository.AddOrder(order);
+                order.AddEvent(new OrderDraftStartedEvent(message.ClientId, message.ProductId));
             } else
             {
                 var orderItemExistent = order.OrderItemExist(orderItem);
