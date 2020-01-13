@@ -5,10 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Queries\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Ecommerce.Core\Ecommerce.Core.csproj" />
     <ProjectReference Include="..\Ecommerce.Sales.Domain\Ecommerce.Sales.Domain.csproj" />
   </ItemGroup>
