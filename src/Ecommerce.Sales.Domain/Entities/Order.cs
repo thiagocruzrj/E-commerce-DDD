@@ -1,5 +1,6 @@
 ﻿using Ecommerce.Core.DomainObjects;
 using Ecommerce.Sales.Domain.Enums;
+using FluentValidation.Results;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,11 +36,16 @@ namespace Ecommerce.Sales.Domain.Entities
 
         protected Order() { _orderItems = new List<OrderItem>(); }
 
-        public void ApplyVoucher(Voucher voucher)
+        public ValidationResult ApplyVoucher(Voucher voucher)
         {
+            var validationResult = voucher.ValidadeIfApplicable();
+            if (!validationResult.IsValid) return validationResult;
+
             Voucher = voucher;
             VoucherUsed = true;
             CalculateOrderValue();
+
+            return validationResult;
         }
 
         public void CalculateOrderValue()

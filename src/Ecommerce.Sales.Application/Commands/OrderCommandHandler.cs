@@ -99,6 +99,7 @@ namespace Ecommerce.Sales.Application.Commands
             if (order == null)
             {
                 await _mediatorHandler.PublishNotification(new DomainNotification("order", "Order not found!"));
+                return false;
             }
 
             var orderItem = await _orderRepository.GetItemByOrder(order.Id, message.ProductId);
@@ -106,6 +107,7 @@ namespace Ecommerce.Sales.Application.Commands
             if (orderItem != null && !order.OrderItemExist(orderItem))
             {
                 await _mediatorHandler.PublishNotification(new DomainNotification("order", "Order item not found !"));
+                return false;
             }
 
             order.RemoveItem(orderItem);
@@ -121,7 +123,42 @@ namespace Ecommerce.Sales.Application.Commands
 
         public async Task<bool> Handle(ApplyVoucherOrderItemCommand message, CancellationToken cancellationToken)
         {
-            throw new System.NotImplementedException();
+            if (!ValidateCommand(message)) return false;
+
+            var order = await _orderRepository.GetDraftOrderByClientId(message.ClientId);
+
+            if (order == null)
+            {
+                await _mediatorHandler.PublishNotification(new DomainNotification("order", "Order not found!"));
+                return false;
+            }
+
+            var voucher = await _orderRepository.GetVoucherByCode(message.VoucherCode);
+
+            if (voucher == null)
+            {
+                await _mediatorHandler.PublishNotification(new DomainNotification("order", "Voucher not found"));
+                return false;
+            }
+
+            var voucherApplicationValidation = order.ApplyVoucher(voucher);
+
+            if(!voucherApplicationValidation.IsValid)
+            {
+                foreach(var error in voucherApplicationValidation.Errors)
+                {
+                    await _mediatorHandler.PublishNotification(new DomainNotification(error.ErrorCode, error.ErrorMessage));
+                }
+
+                return false;
+            }
+
+            order.AddEvent(new OrderUpdatedEvent(message.ClientId, order.Id, order.TotalPrice));
+            order.AddEvent(new OrderVoucherAppliedEvent(message.ClientId, order.Id, voucher.Id));
+
+            _orderRepository.UpdateOrder(order);
+
+            return await _orderRepository.UnitOfWork.Commit();
         }
 
         private bool ValidateCommand(Command message)
