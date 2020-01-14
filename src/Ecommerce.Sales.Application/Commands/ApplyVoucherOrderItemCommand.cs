@@ -6,15 +6,13 @@ namespace Ecommerce.Sales.Application.Commands
 {
     public class ApplyVoucherOrderItemCommand : Command
     {
-        public ApplyVoucherOrderItemCommand(Guid clientId, Guid orderId, string voucherCode)
+        public ApplyVoucherOrderItemCommand(Guid clientId, string voucherCode)
         {
             ClientId = clientId;
-            OrderId = orderId;
             VoucherCode = voucherCode;
         }
 
         public Guid ClientId { get; private set; }
-        public Guid OrderId { get; private set; }
         public string VoucherCode{ get; private set; }
 
         public override bool IsValid()
@@ -32,11 +30,7 @@ namespace Ecommerce.Sales.Application.Commands
                 .NotEqual(Guid.Empty)
                 .WithMessage("Cliend Id Invalid");
 
-            RuleFor(c => c.OrderId)
-                .NotEqual(Guid.Empty)
-                .WithMessage("Order Id Invalid");
-
-            RuleFor(c => c.OrderId)
+            RuleFor(c => c.VoucherCode)
                 .NotEmpty()
                 .WithMessage("Voucher code couldn't Invalid");
         }

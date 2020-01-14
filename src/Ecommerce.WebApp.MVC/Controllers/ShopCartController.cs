@@ -58,53 +58,55 @@ namespace Ecommerce.WebApp.MVC.Controllers
             return RedirectToAction("ProductDetail", "ShopWindow", new { id });
         }
 
-        //[HttpPost]
-        //[Route("remove-item")]
-        //public async Task<IActionResult> RemoveItem(Guid id)
-        //{
-        //    var product = await _productAppService.GetById(id);
-        //    if (product == null) return BadRequest();
+        [HttpPost]
+        [Route("remove-item")]
+        public async Task<IActionResult> RemoveItem(Guid id)
+        {
+            var product = await _productAppService.GetById(id);
+            if (product == null) return BadRequest();
 
-        //    var command = new RemoveOrderItemCommand(ClientId, id);
-        //    await _mediatrHandler.SendCommand(command);
+            var command = new RemoveOrderItemCommand(ClientId, id);
+            await _mediatrHandler.SendCommand(command);
 
-        //    if(ValidOperation())
-        //    {
-        //        return RedirectToAction("Index");
-        //    }
+            if (ValidOperation())
+            {
+                return RedirectToAction("Index");
+            }
 
-        //    return View("Index", await _orderQueries.GetCartByClient(ClientId));
-        //}
+            return View("Index", await _orderQueries.GetCartByClient(ClientId));
+        }
 
-        //[HttpPost]
-        //[Route("update-item")]
-        //public async Task<IActionResult> UpdateItem(Guid id, int quantity)
-        //{
-        //    var product = await _productAppService.GetById(id);
-        //    if (product == null) return BadRequest();
+        [HttpPost]
+        [Route("update-item")]
+        public async Task<IActionResult> UpdateItem(Guid id, int quantity)
+        {
+            var product = await _productAppService.GetById(id);
+            if (product == null) return BadRequest();
 
-        //    var command = new UpdateOrderItemCommand(ClientId, id, quantity);
-        //    await _mediatrHandler.SendCommand(command);
+            var command = new UpdateOrderItemCommand(ClientId, id, quantity);
+            await _mediatrHandler.SendCommand(command);
 
-        //    if(ValidOperation())
-        //    {
-        //        return RedirectToAction("Index");
-        //    }
-        //}
+            if (ValidOperation())
+            {
+                return RedirectToAction("Index");
+            }
 
-        //[HttpPost]
-        //[Route("apply-voucher")]
-        //public async Task<IActionResult> ApplyVoucher(string voucherCode)
-        //{
-        //    var command = new ApplyVoucherOrderItemCommand(ClientId, voucherCode);
-        //    await _mediatrHandler.SendCommand(command);
+            return View("Index", await _orderQueries.GetCartByClient(ClientId));
+        }
 
-        //    if(ValidOperation())
-        //    {
-        //        return RedirectToAction("Index");
-        //    }
+        [HttpPost]
+        [Route("apply-voucher")]
+        public async Task<IActionResult> ApplyVoucher(string voucherCode)
+        {
+            var command = new ApplyVoucherOrderItemCommand(ClientId, voucherCode);
+            await _mediatrHandler.SendCommand(command);
 
-        //    return View("Index", await _orderQueries.GetCartByClient(ClientId));
-        //}
+            if (ValidOperation())
+            {
+                return RedirectToAction("Index");
+            }
+
+            return View("Index", await _orderQueries.GetCartByClient(ClientId));
+        }
     }
 }

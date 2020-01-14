@@ -36,10 +36,14 @@ namespace Ecommerce.WebApp.MVC.Setup
             services.AddScoped<INotificationHandler<ProductBelowStockEvent>, ProductEventHandler>();
 
             // Sales
-            services.AddScoped<IRequestHandler<AddOrderItemCommand, bool>, OrderCommandHandler>();
             services.AddScoped<IOrderRepository, OrderRepository>();
             services.AddScoped<IOrderQueries, OrderQueries>();
             services.AddScoped<SalesContext>();
+
+            services.AddScoped<IRequestHandler<AddOrderItemCommand, bool>, OrderCommandHandler>();
+            services.AddScoped<IRequestHandler<UpdateOrderItemCommand, bool>, OrderCommandHandler>();
+            services.AddScoped<IRequestHandler<RemoveOrderItemCommand, bool>, OrderCommandHandler>();
+            services.AddScoped<IRequestHandler<ApplyVoucherOrderItemCommand, bool>, OrderCommandHandler>();
 
             services.AddScoped<INotificationHandler<OrderDraftStartedEvent>, OrderEventHandler>();
             services.AddScoped<INotificationHandler<OrderItemAddedEvent>, OrderEventHandler>();

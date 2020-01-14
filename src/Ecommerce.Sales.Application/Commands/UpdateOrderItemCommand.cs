@@ -6,16 +6,14 @@ namespace Ecommerce.Sales.Application.Commands
 {
     public class UpdateOrderItemCommand : Command
     {
-        public UpdateOrderItemCommand(Guid clientId, Guid orderId, Guid productId, int quantity)
+        public UpdateOrderItemCommand(Guid clientId, Guid productId, int quantity)
         {
             ClientId = clientId;
-            OrderId = orderId;
             ProductId = productId;
             Quantity = quantity;
         }
 
         public Guid ClientId { get; private set; }
-        public Guid OrderId { get; private set; }
         public Guid ProductId { get; private set; }
         public int Quantity { get; private set; }
 
@@ -33,10 +31,6 @@ namespace Ecommerce.Sales.Application.Commands
             RuleFor(c => c.ClientId)
                 .NotEqual(Guid.Empty)
                 .WithMessage("Cliend Id Invalid");
-
-            RuleFor(c => c.OrderId)
-                .NotEqual(Guid.Empty)
-                .WithMessage("Order Id Invalid");
 
             RuleFor(c => c.ProductId)
                 .NotEqual(Guid.Empty)
