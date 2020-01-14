@@ -11,7 +11,11 @@ using System.Threading.Tasks;
 
 namespace Ecommerce.Sales.Application.Commands
 {
-    public class OrderCommandHandler : IRequestHandler<AddOrderItemCommand, bool>
+    public class OrderCommandHandler : 
+        IRequestHandler<AddOrderItemCommand, bool>,
+        IRequestHandler<UpdateOrderItemCommand, bool>,
+        IRequestHandler<ApplyVoucherOrderItemCommand, bool>,
+        IRequestHandler<RemoveOrderItemCommand, bool>
     {
         private readonly IOrderRepository _orderRepository;
         private readonly IMediatrHandler _mediatorHandler;
@@ -53,6 +57,44 @@ namespace Ecommerce.Sales.Application.Commands
             }
             order.AddEvent(new OrderItemAddedEvent(order.ClientId, order.Id,message.ProductId,message.Name, message.UnitValue, message.Quantity));
             return await _orderRepository.UnitOfWork.Commit();
+        }
+
+        public async Task<bool> Handle(UpdateOrderItemCommand message, CancellationToken cancellationToken)
+        {
+            if (!ValidateCommand(message)) return false;
+
+            var order = await _orderRepository.GetDraftOrderByClientId(message.ClientId);
+
+            if (order == null)
+            {
+                await _mediatorHandler.PublishNotification(new DomainNotification("order", "Order not found !"));
+                return false;
+            }
+
+            var orderItem = await _orderRepository.GetItemByOrder(order.Id, message.ProductId);
+
+            if (!order.OrderItemExist(orderItem))
+            {
+                await _mediatorHandler.PublishNotification(new DomainNotification("order", "Order item not found !"));
+                return false;
+            }
+
+            order.UpdateUnits(orderItem, message.Quantity);
+
+            _orderRepository.UpdateOrderItem(orderItem);
+            _orderRepository.UpdateOrder(order);
+
+            return await _orderRepository.UnitOfWork.Commit();
+        }
+
+        public async Task<bool> Handle(RemoveOrderItemCommand message, CancellationToken cancellationToken)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public async Task<bool> Handle(ApplyVoucherOrderItemCommand message, CancellationToken cancellationToken)
+        {
+            throw new System.NotImplementedException();
         }
 
         private bool ValidateCommand(Command message)

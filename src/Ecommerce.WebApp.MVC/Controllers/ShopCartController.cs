@@ -96,7 +96,7 @@ namespace Ecommerce.WebApp.MVC.Controllers
         //[Route("apply-voucher")]
         //public async Task<IActionResult> ApplyVoucher(string voucherCode)
         //{
-        //    var command = new ApplyOrderVoucherCommand(ClientId, voucherCode);
+        //    var command = new ApplyVoucherOrderItemCommand(ClientId, voucherCode);
         //    await _mediatrHandler.SendCommand(command);
 
         //    if(ValidOperation())
