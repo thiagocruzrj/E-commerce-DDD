@@ -108,5 +108,11 @@ namespace Ecommerce.WebApp.MVC.Controllers
 
             return View("Index", await _orderQueries.GetCartByClient(ClientId));
         }
+
+        [Route("purchase-summary")]
+        public async Task<IActionResult> PurchaseSumary()
+        {
+            return View(await _orderQueries.GetCartByClient(ClientId));
+        }
     }
 }

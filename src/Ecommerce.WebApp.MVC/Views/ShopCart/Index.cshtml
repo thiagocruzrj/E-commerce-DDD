@@ -36,7 +36,7 @@
                                         </td>
 
                                         <td class="col-sm-2 col-md-2" style="text-align: center">
-                                            <form method="post" asp-controller="Cart" asp-action="UpdateItem">
+                                            <form method="post" asp-controller="ShopCart" asp-action="UpdateItem">
                                                 <input type="hidden" id="Id" name="Id" value="@item.ProductId" />
                                                 <div class="row" style="float: left">
                                                     <input style="width: 70px" type="text" class="form-control" name="quantity" id="quantity" value="@item.Quantity">
@@ -52,7 +52,7 @@
                                         <td class="col-sm-1 col-md-1 text-center"><strong>@item.TotalPrice.ToString("C")</strong></td>
 
                                         <td class="col-sm-1 col-md-1">
-                                            <form method="post" asp-controller="Cart" asp-action="RemoveItem">
+                                            <form method="post" asp-controller="ShopCart" asp-action="RemoveItem">
                                                 <input type="hidden" id="Id" name="Id" value="@item.ProductId" />
                                                 <button type="submit" class="btn btn-danger">
                                                     <span class="fas fa-trash-alt"></span> Remove
@@ -108,7 +108,7 @@
                                     </a>
                                 </td>
                                 <td>
-                                    <a asp-controller="Cart" asp-action="PurchaseSummary" class="btn btn-success">
+                                    <a asp-controller="ShopCart" asp-action="PurchaseSummary" class="btn btn-success">
                                         <span class="fas fa-play"></span><br /> Finish Purchase
                                     </a>
                                 </td>

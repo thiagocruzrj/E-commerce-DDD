@@ -49,7 +49,7 @@ namespace Ecommerce.Sales.Application.Commands
                 .WithMessage("Minimum item quantity is 1");
 
             RuleFor(c => c.Quantity)
-                .LessThan(0)
+                .LessThan(15)
                 .WithMessage("Max item quantity is 15");
 
             RuleFor(c => c.UnitValue)

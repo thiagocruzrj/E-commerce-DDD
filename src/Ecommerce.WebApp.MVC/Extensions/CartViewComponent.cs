@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Ecommerce.WebApp.MVC.Extensions
 {
-    public class CartViewComponent
+    public class CartViewComponent : ViewComponent
     {
         private readonly IOrderQueries _orderQueries;
 
