@@ -35,6 +35,10 @@ namespace Ecommerce.Sales.Application.Commands
             RuleFor(c => c.OrderId)
                 .NotEqual(Guid.Empty)
                 .WithMessage("Order Id Invalid");
+
+            RuleFor(c => c.OrderId)
+                .NotEmpty()
+                .WithMessage("Voucher code couldn't Invalid");
         }
     }
 }

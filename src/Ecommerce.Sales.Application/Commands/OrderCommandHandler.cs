@@ -81,6 +81,9 @@ namespace Ecommerce.Sales.Application.Commands
 
             order.UpdateUnits(orderItem, message.Quantity);
 
+            order.AddEvent(new OrderUpdatedEvent(order.ClientId, order.Id, order.TotalPrice));
+            order.AddEvent(new OrderProductUpdatedEvent(message.ClientId, order.Id, message.ProductId, message.Quantity));
+
             _orderRepository.UpdateOrderItem(orderItem);
             _orderRepository.UpdateOrder(order);
 
@@ -89,7 +92,31 @@ namespace Ecommerce.Sales.Application.Commands
 
         public async Task<bool> Handle(RemoveOrderItemCommand message, CancellationToken cancellationToken)
         {
-            throw new System.NotImplementedException();
+            if (!ValidateCommand(message)) return false;
+
+            var order = await _orderRepository.GetDraftOrderByClientId(message.ClientId);
+
+            if (order == null)
+            {
+                await _mediatorHandler.PublishNotification(new DomainNotification("order", "Order not found!"));
+            }
+
+            var orderItem = await _orderRepository.GetItemByOrder(order.Id, message.ProductId);
+
+            if (orderItem != null && !order.OrderItemExist(orderItem))
+            {
+                await _mediatorHandler.PublishNotification(new DomainNotification("order", "Order item not found !"));
+            }
+
+            order.RemoveItem(orderItem);
+
+            order.AddEvent(new OrderUpdatedEvent(message.ClientId, order.Id, order.TotalPrice));
+            order.AddEvent(new OrderProductRemovedEvent(message.ClientId, order.Id, message.ProductId));
+
+            _orderRepository.RemoveOrderItem(orderItem);
+            _orderRepository.UpdateOrder(order);
+
+            return await _orderRepository.UnitOfWork.Commit();
         }
 
         public async Task<bool> Handle(ApplyVoucherOrderItemCommand message, CancellationToken cancellationToken)

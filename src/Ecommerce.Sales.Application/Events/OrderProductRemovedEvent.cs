@@ -3,15 +3,17 @@ using System;
 
 namespace Ecommerce.Sales.Application.Events
 {
-    public class OrderDraftStartedEvent : Event
+    public class OrderProductRemovedEvent : Event
     {
-        public OrderDraftStartedEvent(Guid clientId, Guid orderId)
+        public OrderProductRemovedEvent(Guid clientId, Guid orderId, Guid productId)
         {
             ClientId = clientId;
             AggregateId = orderId;
+            ProductId = productId;
         }
 
         public Guid ClientId { get; private set; }
         public Guid OrderId { get; private set; }
+        public Guid ProductId { get; private set; }
     }
 }
