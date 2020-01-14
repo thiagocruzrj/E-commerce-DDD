@@ -5,6 +5,7 @@ using Ecommerce.Core.Communication.Mediator;
 using Ecommerce.Core.Messages.CommonMessages.Notifications;
 using Ecommerce.Sales.Application.Commands;
 using Ecommerce.Sales.Application.Queries;
+using Ecommerce.Sales.Application.Queries.ViewModels;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -110,9 +111,29 @@ namespace Ecommerce.WebApp.MVC.Controllers
         }
 
         [Route("purchase-summary")]
-        public async Task<IActionResult> PurchaseSumary()
+        public async Task<IActionResult> PurchaseSummary()
         {
             return View(await _orderQueries.GetCartByClient(ClientId));
+        }
+
+        [HttpPost]
+        [Route("start-order")]
+        public async Task<IActionResult> StartOrder(CartViewModel cartViewModel)
+        {
+            var cart = await _orderQueries.GetCartByClient(ClientId);
+
+            var command = new StartOrderCommand(cart.OrderId, ClientId, cart.TotalPrice, cartViewModel.Payment.CardName,
+                                                cartViewModel.Payment.CardName, cartViewModel.Payment.ExpirationCard,
+                                                cartViewModel.Payment.CvcCard);
+
+            await _mediatrHandler.SendCommand(command);
+
+            if (ValidOperation())
+            {
+                return RedirectToAction("Index", "Order");
+            }
+
+            return View("PurchaseSummary", await _orderQueries.GetCartByClient(ClientId));
         }
     }
 }
