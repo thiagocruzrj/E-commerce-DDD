@@ -1,10 +1,13 @@
 ﻿using Ecommerce.Core.Communication.Mediator;
+using Ecommerce.Core.DomainObjects.DTO;
+using Ecommerce.Core.Extensions;
 using Ecommerce.Core.Messages;
 using Ecommerce.Core.Messages.CommonMessages.Notifications;
 using Ecommerce.Sales.Application.Events;
 using Ecommerce.Sales.Domain.Entities;
 using Ecommerce.Sales.Domain.Repositories;
 using MediatR;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -15,7 +18,8 @@ namespace Ecommerce.Sales.Application.Commands
         IRequestHandler<AddOrderItemCommand, bool>,
         IRequestHandler<UpdateOrderItemCommand, bool>,
         IRequestHandler<ApplyVoucherOrderItemCommand, bool>,
-        IRequestHandler<RemoveOrderItemCommand, bool>
+        IRequestHandler<RemoveOrderItemCommand, bool>,
+        IRequestHandler<StartOrderCommand, bool>
     {
         private readonly IOrderRepository _orderRepository;
         private readonly IMediatrHandler _mediatorHandler;
@@ -158,6 +162,23 @@ namespace Ecommerce.Sales.Application.Commands
 
             _orderRepository.UpdateOrder(order);
 
+            return await _orderRepository.UnitOfWork.Commit();
+        }
+
+        public async Task<bool> Handle(StartOrderCommand message, CancellationToken cancellationToken)
+        {
+            if (!ValidateCommand(message)) return false;
+
+            var order = await _orderRepository.GetDraftOrderByClientId(message.ClientId);
+            order.StartOrder();
+
+            var itensList = new List<Item>();
+            order.OrderItem.ForEach(i => itensList.Add(new Item { Id = i.ProductId, Quantity = i.Quantity }));
+            var listOrderProducts = new ListOrderProducts { OrderId = order.Id, Itens = itensList };
+
+            order.AddEvent(new StartedOrderEvent(order.Id, order.ClientId, order.TotalPrice, listOrderProducts, message.CardName, message.CardNumber, message.ExpirateDate, message.CvvCard));
+
+            _orderRepository.UpdateOrder(order);
             return await _orderRepository.UnitOfWork.Commit();
         }
 
