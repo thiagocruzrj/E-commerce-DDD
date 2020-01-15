@@ -33,11 +33,17 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ecommerce.Catalog.Applicati
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ecommerce.WebApp.MVC", "src\Ecommerce.WebApp.MVC\Ecommerce.WebApp.MVC.csproj", "{1DBBA6F5-9940-4542-B78F-1D131348EB17}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ecommerce.Sales.Domain", "src\Ecommerce.Sales.Domain\Ecommerce.Sales.Domain.csproj", "{BC5977DD-8E40-4EA8-AD71-0C5C4D7742F6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ecommerce.Sales.Domain", "src\Ecommerce.Sales.Domain\Ecommerce.Sales.Domain.csproj", "{BC5977DD-8E40-4EA8-AD71-0C5C4D7742F6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ecommerce.Sales.Application", "src\Ecommerce.Sales.Application\Ecommerce.Sales.Application.csproj", "{F72EA3D3-8CE5-4B1D-910E-AEDE76B00125}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ecommerce.Sales.Application", "src\Ecommerce.Sales.Application\Ecommerce.Sales.Application.csproj", "{F72EA3D3-8CE5-4B1D-910E-AEDE76B00125}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ecommerce.Sales.Data", "src\Ecommerce.Sales.Data\Ecommerce.Sales.Data.csproj", "{4F50FDF2-E043-415B-A121-69532126FF05}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ecommerce.Sales.Data", "src\Ecommerce.Sales.Data\Ecommerce.Sales.Data.csproj", "{4F50FDF2-E043-415B-A121-69532126FF05}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ecommerce.Payments.AntiCorruption", "src\Ecommerce.Payments.AntiCorruption\Ecommerce.Payments.AntiCorruption.csproj", "{C1301CFE-2F39-44BC-95EC-8AFA941F667F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ecommerce.Payments.Business", "src\Ecommerce.Payments.Business\Ecommerce.Payments.Business.csproj", "{A82EAA08-0E42-423D-836E-DBBA71C13AB1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ecommerce.Payments.Data", "src\Ecommerce.Payments.Data\Ecommerce.Payments.Data.csproj", "{09D9BFDA-B504-4DF8-8B3D-F4725A5B8707}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -81,6 +87,18 @@ Global
 		{4F50FDF2-E043-415B-A121-69532126FF05}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4F50FDF2-E043-415B-A121-69532126FF05}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4F50FDF2-E043-415B-A121-69532126FF05}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C1301CFE-2F39-44BC-95EC-8AFA941F667F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C1301CFE-2F39-44BC-95EC-8AFA941F667F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C1301CFE-2F39-44BC-95EC-8AFA941F667F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C1301CFE-2F39-44BC-95EC-8AFA941F667F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A82EAA08-0E42-423D-836E-DBBA71C13AB1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A82EAA08-0E42-423D-836E-DBBA71C13AB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A82EAA08-0E42-423D-836E-DBBA71C13AB1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A82EAA08-0E42-423D-836E-DBBA71C13AB1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{09D9BFDA-B504-4DF8-8B3D-F4725A5B8707}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{09D9BFDA-B504-4DF8-8B3D-F4725A5B8707}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{09D9BFDA-B504-4DF8-8B3D-F4725A5B8707}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{09D9BFDA-B504-4DF8-8B3D-F4725A5B8707}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -102,6 +120,9 @@ Global
 		{BC5977DD-8E40-4EA8-AD71-0C5C4D7742F6} = {FE54FCC8-EA3E-447B-A62D-C311709E0B5C}
 		{F72EA3D3-8CE5-4B1D-910E-AEDE76B00125} = {FE54FCC8-EA3E-447B-A62D-C311709E0B5C}
 		{4F50FDF2-E043-415B-A121-69532126FF05} = {FE54FCC8-EA3E-447B-A62D-C311709E0B5C}
+		{C1301CFE-2F39-44BC-95EC-8AFA941F667F} = {CA27EB65-FA1C-475D-A8F2-425987D2C08B}
+		{A82EAA08-0E42-423D-836E-DBBA71C13AB1} = {CA27EB65-FA1C-475D-A8F2-425987D2C08B}
+		{09D9BFDA-B504-4DF8-8B3D-F4725A5B8707} = {CA27EB65-FA1C-475D-A8F2-425987D2C08B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2D5D4022-3635-48B1-89C9-FD885B05E2B8}
