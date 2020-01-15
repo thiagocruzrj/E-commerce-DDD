@@ -9,8 +9,4 @@
     <PackageReference Include="MediatR" Version="8.0.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Messages\CommonMessages\IntegrationEvents\" />
-  </ItemGroup>
-
 </Project>

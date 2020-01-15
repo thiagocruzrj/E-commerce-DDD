@@ -2,6 +2,7 @@
 using Ecommerce.Core.DomainObjects.DTO;
 using Ecommerce.Core.Extensions;
 using Ecommerce.Core.Messages;
+using Ecommerce.Core.Messages.CommonMessages.IntegrationEvents;
 using Ecommerce.Core.Messages.CommonMessages.Notifications;
 using Ecommerce.Sales.Application.Events;
 using Ecommerce.Sales.Domain.Entities;

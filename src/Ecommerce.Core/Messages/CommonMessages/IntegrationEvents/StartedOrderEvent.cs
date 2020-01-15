@@ -1,15 +1,14 @@
 ﻿using Ecommerce.Core.DomainObjects.DTO;
-using Ecommerce.Core.Messages;
 using System;
 
-namespace Ecommerce.Sales.Application.Events
+namespace Ecommerce.Core.Messages.CommonMessages.IntegrationEvents
 {
-    public class StartedOrderEvent : Event
+    public class StartedOrderEvent : IntegrationEvent
     {
-        public StartedOrderEvent(Guid orderId, Guid client, decimal total, ListOrderProducts orderProducts, string cardName, string cardNumber, string expirationDate, string cvvCard)
+        public StartedOrderEvent(Guid orderId, Guid clientId, decimal total, ListOrderProducts orderProducts, string cardName, string cardNumber, string expirationDate, string cvvCard)
         {
             OrderId = orderId;
-            Client = client;
+            ClientId = clientId;
             Total = total;
             OrderProducts = orderProducts;
             CardName = cardName;
@@ -19,7 +18,7 @@ namespace Ecommerce.Sales.Application.Events
         }
 
         public Guid OrderId { get; private set; }
-        public Guid Client { get; private set; }
+        public Guid ClientId { get; private set; }
         public decimal Total { get; private set; }
         public ListOrderProducts OrderProducts { get; private set; }
         public string CardName { get; private set; }

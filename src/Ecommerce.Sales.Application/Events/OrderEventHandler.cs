@@ -1,7 +1,6 @@
-﻿using MediatR;
+﻿using Ecommerce.Core.Messages.CommonMessages.IntegrationEvents;
+using MediatR;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -10,7 +9,8 @@ namespace Ecommerce.Sales.Application.Events
     public class OrderEventHandler :
         INotificationHandler<OrderDraftStartedEvent>,
         INotificationHandler<OrderUpdatedEvent>,
-        INotificationHandler<OrderItemAddedEvent>
+        INotificationHandler<OrderItemAddedEvent>,
+        INotificationHandler<OrderStockRejectedEvent>
     {
         public Task Handle(OrderDraftStartedEvent notification, CancellationToken cancellationToken)
         {
@@ -24,6 +24,12 @@ namespace Ecommerce.Sales.Application.Events
 
         public Task Handle(OrderItemAddedEvent notification, CancellationToken cancellationToken)
         {
+            return Task.CompletedTask;
+        }
+
+        public Task Handle(OrderStockRejectedEvent notification, CancellationToken cancellationToken)
+        {
+            // cancel payment order - return error for client
             return Task.CompletedTask;
         }
     }

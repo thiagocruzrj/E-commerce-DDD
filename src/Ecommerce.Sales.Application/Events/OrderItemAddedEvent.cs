@@ -9,6 +9,7 @@ namespace Ecommerce.Sales.Application.Events
         {
             ClientId = clientId;
             AggregateId = orderId;
+            OrderId = orderId;
             ProductId = productId;
             ProductName = productName;
             UnitPrice = unitPrice;

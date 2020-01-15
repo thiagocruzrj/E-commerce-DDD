@@ -8,6 +8,7 @@ namespace Ecommerce.Sales.Application.Events
         public OrderVoucherAppliedEvent(Guid clientId, Guid orderId, Guid productId)
         {
             ClientId = clientId;
+            AggregateId = orderId;
             OrderId = orderId;
             ProductId = productId;
         }

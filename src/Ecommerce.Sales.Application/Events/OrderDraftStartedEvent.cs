@@ -8,6 +8,7 @@ namespace Ecommerce.Sales.Application.Events
         public OrderDraftStartedEvent(Guid clientId, Guid orderId)
         {
             ClientId = clientId;
+            OrderId = orderId;
             AggregateId = orderId;
         }
 

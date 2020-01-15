@@ -10,6 +10,7 @@ namespace Ecommerce.Sales.Application.Events
             AggregateId = orderId;
             ClientId = clientId;
             OrderId = orderId;
+            OrderId = orderId;
             TotalPrice = totalPrice;
         }
 
