@@ -10,7 +10,9 @@ namespace Ecommerce.Sales.Application.Events
         INotificationHandler<OrderDraftStartedEvent>,
         INotificationHandler<OrderUpdatedEvent>,
         INotificationHandler<OrderItemAddedEvent>,
-        INotificationHandler<OrderStockRejectedEvent>
+        INotificationHandler<OrderStockRejectedEvent>,
+        INotificationHandler<PaymentMadeEvent>,
+        INotificationHandler<PaymentOrderRefusedEvent>
     {
         public Task Handle(OrderDraftStartedEvent notification, CancellationToken cancellationToken)
         {
@@ -30,6 +32,16 @@ namespace Ecommerce.Sales.Application.Events
         public Task Handle(OrderStockRejectedEvent notification, CancellationToken cancellationToken)
         {
             // cancel payment order - return error for client
+            return Task.CompletedTask;
+        }
+
+        public Task Handle(PaymentMadeEvent notification, CancellationToken cancellationToken)
+        {
+            return Task.CompletedTask;
+        }
+
+        public Task Handle(PaymentOrderRefusedEvent notification, CancellationToken cancellationToken)
+        {
             return Task.CompletedTask;
         }
     }

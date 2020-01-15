@@ -6,6 +6,13 @@ using Ecommerce.Catalog.Domain.Events;
 using Ecommerce.Catalog.Domain.Repository;
 using Ecommerce.Core.Communication.Mediator;
 using Ecommerce.Core.Messages.CommonMessages.Notifications;
+using Ecommerce.Payments.AntiCorruption;
+using Ecommerce.Payments.AntiCorruption.Config;
+using Ecommerce.Payments.AntiCorruption.Gateway;
+using Ecommerce.Payments.Business;
+using Ecommerce.Payments.Business.Repository;
+using Ecommerce.Payments.Business.Services;
+using Ecommerce.Payments.Data;
 using Ecommerce.Sales.Application.Commands;
 using Ecommerce.Sales.Application.Events;
 using Ecommerce.Sales.Application.Queries;
@@ -48,6 +55,15 @@ namespace Ecommerce.WebApp.MVC.Setup
             services.AddScoped<INotificationHandler<OrderDraftStartedEvent>, OrderEventHandler>();
             services.AddScoped<INotificationHandler<OrderItemAddedEvent>, OrderEventHandler>();
             services.AddScoped<INotificationHandler<OrderUpdatedEvent>, OrderEventHandler>();
+
+            // Payment
+            services.AddScoped<IPaymentRepository, PaymentRepository>();
+            services.AddScoped<IPaymentService, PaymentService>();
+            services.AddScoped<IPaymentCreditCardFacade, PaymentCreditCardFacade>();
+            services.AddScoped<IPayPalGateway, PayPalGateway>();
+            services.AddScoped<IConfigurationManager, ConfigurationManager>();
+            services.AddScoped<PaymentContext>();
+
 
         }
     }

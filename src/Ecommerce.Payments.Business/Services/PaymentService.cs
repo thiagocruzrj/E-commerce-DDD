@@ -1,5 +1,6 @@
 ﻿using Ecommerce.Core.Communication.Mediator;
 using Ecommerce.Core.DomainObjects.DTO;
+using Ecommerce.Core.Messages.CommonMessages.IntegrationEvents;
 using Ecommerce.Core.Messages.CommonMessages.Notifications;
 using Ecommerce.Payments.Business.Entities;
 using Ecommerce.Payments.Business.Enums;

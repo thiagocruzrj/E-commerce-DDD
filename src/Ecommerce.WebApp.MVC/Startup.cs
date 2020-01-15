@@ -12,6 +12,7 @@ using MediatR;
 using Ecommerce.Catalog.Data;
 using Ecommerce.WebApp.MVC.Setup;
 using Ecommerce.Sales.Data;
+using Ecommerce.Payments.Data;
 
 namespace Ecommerce.WebApp.MVC
 {
@@ -38,8 +39,12 @@ namespace Ecommerce.WebApp.MVC
             services.AddDbContext<SalesContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
+            services.AddDbContext<PaymentContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+
 
             services.AddControllersWithViews();
             services.AddRazorPages();
