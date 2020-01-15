@@ -1,7 +1,5 @@
 ﻿using Ecommerce.Core.DomainObjects;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Ecommerce.Payments.Business.Entities
 {
