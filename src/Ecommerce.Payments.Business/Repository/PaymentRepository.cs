@@ -1,8 +1,6 @@
 ﻿using Ecommerce.Core.Data;
 using Ecommerce.Payments.Business.Entities;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Ecommerce.Payments.Business.Repository
 {
