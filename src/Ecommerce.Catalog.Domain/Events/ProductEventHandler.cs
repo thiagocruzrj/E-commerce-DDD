@@ -10,7 +10,8 @@ using System.Threading.Tasks;
 namespace Ecommerce.Catalog.Domain.Events
 {
     public class ProductEventHandler : INotificationHandler<ProductBelowStockEvent>,
-                                       INotificationHandler<StartedOrderEvent>
+                                       INotificationHandler<StartedOrderEvent>,
+                                       INotificationHandler<ProcessOrderCanceledEvent>
     {
         private readonly IProductRepository _productRepository;
         private readonly IStockService _stockService;
@@ -40,6 +41,11 @@ namespace Ecommerce.Catalog.Domain.Events
             {
                 await _mediatorHandler.PublishEvent(new OrderStockRejectedEvent(message.OrderId, message.ClientId));
             }
+        }
+
+        public async Task Handle(ProcessOrderCanceledEvent message, CancellationToken cancellationToken)
+        {
+            await _stockService.ReplenishListOrderProducts(message.ListOrderProducts);
         }
     }
 }

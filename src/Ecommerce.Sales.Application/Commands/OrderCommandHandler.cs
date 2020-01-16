@@ -22,7 +22,8 @@ namespace Ecommerce.Sales.Application.Commands
         IRequestHandler<RemoveOrderItemCommand, bool>,
         IRequestHandler<StartOrderCommand, bool>,
         IRequestHandler<FinishOrderCommand, bool>,
-        IRequestHandler<CancelProcessingOrderReverseStockCommand, bool>
+        IRequestHandler<CancelProcessingOrderReverseStockCommand, bool>,
+        IRequestHandler<CancelProcessingOrderCommand, bool>
     {
         private readonly IOrderRepository _orderRepository;
         private readonly IMediatrHandler _mediatorHandler;
@@ -216,6 +217,21 @@ namespace Ecommerce.Sales.Application.Commands
             var listProductsOrder = new ListOrderProducts { OrderId = order.Id, Itens = itemsList };
 
             order.AddEvent(new ProcessOrderCanceledEvent(order.Id, order.ClientId, listProductsOrder));
+            order.BecomeDraft();
+
+            return await _orderRepository.UnitOfWork.Commit();
+        }
+
+        public async Task<bool> Handle(CancelProcessingOrderCommand message, CancellationToken cancellationToken)
+        {
+            var order = await _orderRepository.GetByOrderId(message.OrderId);
+
+            if(order == null)
+            {
+                await _mediatorHandler.PublishNotification(new DomainNotification("order", "Order not found!"));
+                return false;
+            }
+
             order.BecomeDraft();
 
             return await _orderRepository.UnitOfWork.Commit();

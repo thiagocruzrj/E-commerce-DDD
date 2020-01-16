@@ -39,10 +39,10 @@ namespace Ecommerce.Sales.Application.Events
             return Task.CompletedTask;
         }
 
-        public Task Handle(OrderStockRejectedEvent message, CancellationToken cancellationToken)
+        public async Task Handle(OrderStockRejectedEvent message, CancellationToken cancellationToken)
         {
             // cancel payment order - return error for client
-            return Task.CompletedTask;
+            await _mediatorHandler.SendCommand(new CancelProcessingOrderCommand(message.OrderId, message.ClientId));
         }
 
         public async Task Handle(PaymentMadeEvent message, CancellationToken cancellationToken)
