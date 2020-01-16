@@ -45,6 +45,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ecommerce.Payments.Business
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ecommerce.Payments.Data", "src\Ecommerce.Payments.Data\Ecommerce.Payments.Data.csproj", "{09D9BFDA-B504-4DF8-8B3D-F4725A5B8707}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BuildingBlocks", "BuildingBlocks", "{9B5F4B2F-5FC3-49E8-BB27-9728A9F76760}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventSourcing", "src\EventSourcing\EventSourcing.csproj", "{E40A2433-EE18-466A-8165-AC7BF155FF64}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -99,6 +103,10 @@ Global
 		{09D9BFDA-B504-4DF8-8B3D-F4725A5B8707}.Debug|Any CPU.Build.0 = Release|Any CPU
 		{09D9BFDA-B504-4DF8-8B3D-F4725A5B8707}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{09D9BFDA-B504-4DF8-8B3D-F4725A5B8707}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E40A2433-EE18-466A-8165-AC7BF155FF64}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E40A2433-EE18-466A-8165-AC7BF155FF64}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E40A2433-EE18-466A-8165-AC7BF155FF64}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E40A2433-EE18-466A-8165-AC7BF155FF64}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -123,6 +131,7 @@ Global
 		{C1301CFE-2F39-44BC-95EC-8AFA941F667F} = {CA27EB65-FA1C-475D-A8F2-425987D2C08B}
 		{A82EAA08-0E42-423D-836E-DBBA71C13AB1} = {CA27EB65-FA1C-475D-A8F2-425987D2C08B}
 		{09D9BFDA-B504-4DF8-8B3D-F4725A5B8707} = {CA27EB65-FA1C-475D-A8F2-425987D2C08B}
+		{E40A2433-EE18-466A-8165-AC7BF155FF64} = {9B5F4B2F-5FC3-49E8-BB27-9728A9F76760}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2D5D4022-3635-48B1-89C9-FD885B05E2B8}
