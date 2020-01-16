@@ -5,11 +5,13 @@ using Ecommerce.Catalog.Domain.DomainService;
 using Ecommerce.Catalog.Domain.Events;
 using Ecommerce.Catalog.Domain.Repository;
 using Ecommerce.Core.Communication.Mediator;
+using Ecommerce.Core.Messages.CommonMessages.IntegrationEvents;
 using Ecommerce.Core.Messages.CommonMessages.Notifications;
 using Ecommerce.Payments.AntiCorruption;
 using Ecommerce.Payments.AntiCorruption.Config;
 using Ecommerce.Payments.AntiCorruption.Gateway;
 using Ecommerce.Payments.Business;
+using Ecommerce.Payments.Business.Events;
 using Ecommerce.Payments.Business.Repository;
 using Ecommerce.Payments.Business.Services;
 using Ecommerce.Payments.Data;
@@ -41,6 +43,8 @@ namespace Ecommerce.WebApp.MVC.Setup
             services.AddScoped<CatalogContext>();
 
             services.AddScoped<INotificationHandler<ProductBelowStockEvent>, ProductEventHandler>();
+            services.AddScoped<INotificationHandler<StartedOrderEvent>, ProductEventHandler>();
+            services.AddScoped<INotificationHandler<ProcessOrderCanceledEvent>, ProductEventHandler>();
 
             // Sales
             services.AddScoped<IOrderRepository, OrderRepository>();
@@ -51,10 +55,15 @@ namespace Ecommerce.WebApp.MVC.Setup
             services.AddScoped<IRequestHandler<UpdateOrderItemCommand, bool>, OrderCommandHandler>();
             services.AddScoped<IRequestHandler<RemoveOrderItemCommand, bool>, OrderCommandHandler>();
             services.AddScoped<IRequestHandler<ApplyVoucherOrderItemCommand, bool>, OrderCommandHandler>();
+            services.AddScoped<IRequestHandler<StartOrderCommand, bool>, OrderCommandHandler>();
+            services.AddScoped<IRequestHandler<FinishOrderCommand, bool>, OrderCommandHandler>();
+            services.AddScoped<IRequestHandler<CancelProcessingOrderCommand, bool>, OrderCommandHandler>();
+            services.AddScoped<IRequestHandler<CancelProcessingOrderReverseStockCommand, bool>, OrderCommandHandler>();
 
             services.AddScoped<INotificationHandler<OrderDraftStartedEvent>, OrderEventHandler>();
-            services.AddScoped<INotificationHandler<OrderItemAddedEvent>, OrderEventHandler>();
-            services.AddScoped<INotificationHandler<OrderUpdatedEvent>, OrderEventHandler>();
+            services.AddScoped<INotificationHandler<OrderStockRejectedEvent>, OrderEventHandler>();
+            services.AddScoped<INotificationHandler<PaymentMadeEvent>, OrderEventHandler>();
+            services.AddScoped<INotificationHandler<PaymentOrderRefusedEvent>, OrderEventHandler>();
 
             // Payment
             services.AddScoped<IPaymentRepository, PaymentRepository>();
@@ -64,7 +73,7 @@ namespace Ecommerce.WebApp.MVC.Setup
             services.AddScoped<IConfigurationManager, ConfigurationManager>();
             services.AddScoped<PaymentContext>();
 
-
+            services.AddScoped<INotificationHandler<OrderStockConfirmedEvent>, PaymentEventHandler>();
         }
     }
 }

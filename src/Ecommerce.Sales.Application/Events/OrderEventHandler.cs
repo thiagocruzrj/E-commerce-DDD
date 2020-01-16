@@ -10,7 +10,6 @@ namespace Ecommerce.Sales.Application.Events
 {
     public class OrderEventHandler :
         INotificationHandler<OrderDraftStartedEvent>,
-        INotificationHandler<OrderUpdatedEvent>,
         INotificationHandler<OrderItemAddedEvent>,
         INotificationHandler<OrderStockRejectedEvent>,
         INotificationHandler<PaymentMadeEvent>,
