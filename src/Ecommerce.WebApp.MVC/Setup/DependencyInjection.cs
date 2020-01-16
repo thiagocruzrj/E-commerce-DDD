@@ -21,6 +21,7 @@ using Ecommerce.Sales.Application.Queries;
 using Ecommerce.Sales.Data;
 using Ecommerce.Sales.Data.Repository;
 using Ecommerce.Sales.Domain.Repositories;
+using EventSourcing.Services;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -35,6 +36,9 @@ namespace Ecommerce.WebApp.MVC.Setup
 
             // Notifications
             services.AddScoped<INotificationHandler<DomainNotification>, DomainNotificationHandler>();
+
+            // Event Sourcing
+            services.AddSingleton<IEventStoreService,EventStoreService>();
 
             // Catalog
             services.AddScoped<IProductRepository, ProductRepository>();
