@@ -20,7 +20,9 @@ namespace Ecommerce.Sales.Application.Commands
         IRequestHandler<UpdateOrderItemCommand, bool>,
         IRequestHandler<ApplyVoucherOrderItemCommand, bool>,
         IRequestHandler<RemoveOrderItemCommand, bool>,
-        IRequestHandler<StartOrderCommand, bool>
+        IRequestHandler<StartOrderCommand, bool>,
+        IRequestHandler<FinishOrderCommand, bool>,
+        IRequestHandler<CancelProcessingOrderReverseStockCommand, bool>
     {
         private readonly IOrderRepository _orderRepository;
         private readonly IMediatrHandler _mediatorHandler;
@@ -180,6 +182,42 @@ namespace Ecommerce.Sales.Application.Commands
             order.AddEvent(new StartedOrderEvent(order.Id, order.ClientId, order.TotalPrice, listOrderProducts, message.CardName, message.CardNumber, message.ExpirateDate, message.CvvCard));
 
             _orderRepository.UpdateOrder(order);
+            return await _orderRepository.UnitOfWork.Commit();
+        }
+
+        public async Task<bool> Handle(FinishOrderCommand message, CancellationToken cancellationToken)
+        {
+            var order = await _orderRepository.GetByOrderId(message.OrderId);
+
+            if(order == null)
+            {
+                await _mediatorHandler.PublishNotification(new DomainNotification("order", "Order not found!"));
+                return false;
+            }
+
+            order.FinishOrder();
+
+            order.AddEvent(new OrderFinishedEvent(message.OrderId));
+            return await _orderRepository.UnitOfWork.Commit();
+        }
+
+        public async Task<bool> Handle(CancelProcessingOrderReverseStockCommand message, CancellationToken cancellationToken)
+        {
+            var order = await _orderRepository.GetByOrderId(message.OrderId);
+
+            if (order == null)
+            {
+                await _mediatorHandler.PublishNotification(new DomainNotification("order", "Order not found!"));
+                return false;
+            }
+
+            var itemsList = new List<Item>();
+            order.OrderItem.ForEach(i => itemsList.Add(new Item { Id = i.ProductId, Quantity = i.Quantity }));
+            var listProductsOrder = new ListOrderProducts { OrderId = order.Id, Itens = itemsList };
+
+            order.AddEvent(new ProcessOrderCanceledEvent(order.Id, order.ClientId, listProductsOrder));
+            order.BecomeDraft();
+
             return await _orderRepository.UnitOfWork.Commit();
         }
 

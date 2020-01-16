@@ -37,6 +37,11 @@ namespace Ecommerce.Sales.Data.Repository
             _context.Dispose();
         }
 
+        public async Task<Order> GetByOrderId(Guid id)
+        {
+            return await _context.Orders.FindAsync(id);
+        }
+
         public async Task<Order> GetDraftOrderByClientId(Guid clientId)
         {
             var order = await _context.Orders.FirstOrDefaultAsync(p => p.ClientId == clientId && p.OrderStatus == OrderStatus.Draft);

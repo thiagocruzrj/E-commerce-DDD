@@ -8,6 +8,7 @@ namespace Ecommerce.Sales.Domain.Repositories
 {
     public interface IOrderRepository : IRepository<Order>
     {
+        Task<Order> GetByOrderId(Guid id);
         Task<IEnumerable<Order>> GetListByClientId(Guid clientId);
         Task<Order> GetDraftOrderByClientId(Guid clientId);
         void AddOrder(Order order);
@@ -18,6 +19,7 @@ namespace Ecommerce.Sales.Domain.Repositories
         void AddOrderItem(OrderItem orderItem);
         void UpdateOrderItem(OrderItem orderItem);
         void RemoveOrderItem(OrderItem orderItem);
+
         Task<Voucher> GetVoucherByCode(string code);
     }
 }

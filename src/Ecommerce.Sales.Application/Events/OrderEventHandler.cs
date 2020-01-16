@@ -1,4 +1,6 @@
-﻿using Ecommerce.Core.Messages.CommonMessages.IntegrationEvents;
+﻿using Ecommerce.Core.Communication.Mediator;
+using Ecommerce.Core.Messages.CommonMessages.IntegrationEvents;
+using Ecommerce.Sales.Application.Commands;
 using MediatR;
 using System;
 using System.Threading;
@@ -14,35 +16,43 @@ namespace Ecommerce.Sales.Application.Events
         INotificationHandler<PaymentMadeEvent>,
         INotificationHandler<PaymentOrderRefusedEvent>
     {
-        public Task Handle(OrderDraftStartedEvent notification, CancellationToken cancellationToken)
+
+        private readonly IMediatrHandler _mediatorHandler;
+
+        public OrderEventHandler(IMediatrHandler mediatorHandler)
+        {
+            _mediatorHandler = mediatorHandler;
+        }
+
+        public Task Handle(OrderDraftStartedEvent message, CancellationToken cancellationToken)
         {
             return Task.CompletedTask;
         }
 
-        public Task Handle(OrderUpdatedEvent notification, CancellationToken cancellationToken)
+        public Task Handle(OrderUpdatedEvent message, CancellationToken cancellationToken)
         {
             return Task.CompletedTask;
         }
 
-        public Task Handle(OrderItemAddedEvent notification, CancellationToken cancellationToken)
+        public Task Handle(OrderItemAddedEvent message, CancellationToken cancellationToken)
         {
             return Task.CompletedTask;
         }
 
-        public Task Handle(OrderStockRejectedEvent notification, CancellationToken cancellationToken)
+        public Task Handle(OrderStockRejectedEvent message, CancellationToken cancellationToken)
         {
             // cancel payment order - return error for client
             return Task.CompletedTask;
         }
 
-        public Task Handle(PaymentMadeEvent notification, CancellationToken cancellationToken)
+        public async Task Handle(PaymentMadeEvent message, CancellationToken cancellationToken)
         {
-            return Task.CompletedTask;
+            await _mediatorHandler.SendCommand(new FinishOrderCommand(message.OrderId, message.ClientId));
         }
 
-        public Task Handle(PaymentOrderRefusedEvent notification, CancellationToken cancellationToken)
+        public async Task Handle(PaymentOrderRefusedEvent message, CancellationToken cancellationToken)
         {
-            return Task.CompletedTask;
+            await _mediatorHandler.SendCommand(new CancelProcessingOrderReverseStockCommand(message.OrderId, message.ClientId));
         }
     }
 }

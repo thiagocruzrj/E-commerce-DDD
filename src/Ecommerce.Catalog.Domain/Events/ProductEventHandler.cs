@@ -35,7 +35,7 @@ namespace Ecommerce.Catalog.Domain.Events
 
             if (result)
             {
-                await _mediatorHandler.PublishEvent(new OrderStockConfirmed(message.OrderId, message.ClientId, message.Total, message.OrderProducts, message.CardName, message.CardNumber, message.ExpirationDate, message.CvvCard ));
+                await _mediatorHandler.PublishEvent(new OrderStockConfirmedEvent(message.OrderId, message.ClientId, message.Total, message.OrderProducts, message.CardName, message.CardNumber, message.ExpirationDate, message.CvvCard ));
             } else
             {
                 await _mediatorHandler.PublishEvent(new OrderStockRejectedEvent(message.OrderId, message.ClientId));

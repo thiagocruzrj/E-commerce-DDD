@@ -3,9 +3,9 @@ using System;
 
 namespace Ecommerce.Core.Messages.CommonMessages.IntegrationEvents
 {
-    public class OrderStockConfirmed : IntegrationEvent
+    public class OrderStockConfirmedEvent : IntegrationEvent
     {
-        public OrderStockConfirmed(Guid orderId, Guid clientId, decimal total, ListOrderProducts orderProducts, string cardName, string cardNumber, string expirationCard, string cvvCard)
+        public OrderStockConfirmedEvent(Guid orderId, Guid clientId, decimal total, ListOrderProducts orderProducts, string cardName, string cardNumber, string expirationCard, string cvvCard)
         {
             AggregateId = orderId;
             OrderId = orderId;

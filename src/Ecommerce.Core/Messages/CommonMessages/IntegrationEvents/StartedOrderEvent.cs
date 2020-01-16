@@ -7,6 +7,7 @@ namespace Ecommerce.Core.Messages.CommonMessages.IntegrationEvents
     {
         public StartedOrderEvent(Guid orderId, Guid clientId, decimal total, ListOrderProducts orderProducts, string cardName, string cardNumber, string expirationDate, string cvvCard)
         {
+            AggregateId = orderId;
             OrderId = orderId;
             ClientId = clientId;
             Total = total;
