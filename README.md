@@ -13,6 +13,6 @@ Tasklist:
 - [x] Domain events
 - [x] CQRS
 - [x] Notification handling
-- [ ] BC Integrations
-- [ ] Service bus, sagas and queue MSQM
+- [x] BC Integrations
+- [x] Service bus, sagas and queue MSQM
 - [ ] Event Sourcing
