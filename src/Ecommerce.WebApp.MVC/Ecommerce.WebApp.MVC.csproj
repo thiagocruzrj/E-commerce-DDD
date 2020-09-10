@@ -32,6 +32,7 @@
     <ProjectReference Include="..\Ecommerce.Sales.Application\Ecommerce.Sales.Application.csproj" />
     <ProjectReference Include="..\Ecommerce.Sales.Data\Ecommerce.Sales.Data.csproj" />
     <ProjectReference Include="..\Ecommerce.Sales.Domain\Ecommerce.Sales.Domain.csproj" />
+    <ProjectReference Include="..\EventSourcing\EventSourcing.csproj" />
   </ItemGroup>
 
 
